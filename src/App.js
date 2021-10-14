@@ -32,6 +32,7 @@ class Executor extends Component {
     return (
       <button
         className="col mr-1 btn btn-success"
+        onClick={() => this.props.onClick()}
       >
         {this.translateToExecutor(this.props.cmd)}
       </button>
@@ -57,7 +58,7 @@ class App extends Component {
   };
 
   renderCalc(cmd) {
-    return <Executor cmd={cmd} />;
+    return <Executor cmd={cmd} onClick={() => this.calc(cmd)} />;
   };
 
   // 数値入力
@@ -197,9 +198,9 @@ class App extends Component {
           value={this.state.formula}
         />
         <div className="row">
-          {this.renderMemory("MC")}
-          {this.renderMemory("M-")}
-          {this.renderMemory("M+")}
+          {this.renderMemory('MC')}
+          {this.renderMemory('M-')}
+          {this.renderMemory('M+')}
           {this.renderCalc('*')}
         </div>
         <div className="row mt-1">
@@ -219,8 +220,8 @@ class App extends Component {
           {this.renderCalc('=')}
         </div>
         <div className="row mt-1">
-          {this.renderClear("C")}
-          {this.renderClear("AC")}
+          {this.renderClear('C')}
+          {this.renderClear('AC')}
         </div>
       </div>
     );
