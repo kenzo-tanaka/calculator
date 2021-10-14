@@ -4,7 +4,6 @@ class NumBtn extends Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
       <button
@@ -18,14 +17,17 @@ class NumBtn extends Component {
 }
 
 class App extends Component {
-  state = {
-    formula: "",
-    display_result: 0,
-    memory: 0,
-    calc_component: "", //入力中の数値を一時的に保管
-    operator: "", //入力中の演算子を一時的に保管
-    calc_component_array: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      formula: "",
+      display_result: 0,
+      memory: 0,
+      calc_component: "", //入力中の数値を一時的に保管
+      operator: "", //入力中の演算子を一時的に保管
+      calc_component_array: []
+    }
+  }
 
   renderNum = (i) => {
     return <NumBtn value={i} onClick={() => this.addNum(i)} />;
