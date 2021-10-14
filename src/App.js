@@ -1,5 +1,19 @@
 import React, { Component } from "react";
 
+class NumBtn extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <button className="btn btn-light col mr-1">
+        {this.props.value}
+      </button>
+    )
+  }
+}
+
 class App extends Component {
   state = {
     formula: "",
@@ -104,11 +118,7 @@ class App extends Component {
   };
 
   renderNum = (i) => {
-    return (
-      <button className="btn btn-light col mr-1" onClick={e => this.adnum(i)}>
-        {i}
-      </button>
-    );
+    return <NumBtn value={i} />;
   };
 
   renderCalc(cmd) {
