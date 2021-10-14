@@ -11,7 +11,7 @@ const NumBtn = (props) => {
   )
 };
 
-class Executor extends Component {
+class ExecutorBtn extends Component {
   constructor(props) {
     super(props);
   }
@@ -35,7 +35,7 @@ class Executor extends Component {
   }
 }
 
-class Clear extends Component {
+class ClearBtn extends Component {
   constructor(props) {
     super(props);
   }
@@ -52,7 +52,7 @@ class Clear extends Component {
   }
 }
 
-class Memory extends Component {
+class MemoryBtn extends Component {
   constructor(props) {
     super(props);
   }
@@ -87,15 +87,15 @@ class App extends Component {
   };
 
   renderCalc(cmd) {
-    return <Executor cmd={cmd} onClick={() => this.calc(cmd)} />;
+    return <ExecutorBtn cmd={cmd} onClick={() => this.calc(cmd)} />;
   };
 
   renderClear(cmd) {
-    return <Clear cmd={cmd} onClick={() => this.clear(cmd)} />;
+    return <ClearBtn cmd={cmd} onClick={() => this.clear(cmd)} />;
   };
 
   renderMemory(cmd) {
-    return <Memory cmd={cmd} onClick={() => this.memory(cmd)} />;
+    return <MemoryBtn cmd={cmd} onClick={() => this.memory(cmd)} />;
   };
 
   clear = cmd => {
