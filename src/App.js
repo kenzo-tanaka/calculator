@@ -1,20 +1,15 @@
 import React, { Component } from "react";
 
-class NumBtn extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <button
-        className="btn btn-light col mr-1"
-        onClick={() => this.props.onClick()}
-      >
-        {this.props.value}
-      </button>
-    )
-  }
-}
+const NumBtn = (props) => {
+  return (
+    <button
+      className="btn btn-light col mr-1"
+      onClick={() => props.onClick()}
+    >
+      {props.value}
+    </button>
+  )
+};
 
 class Executor extends Component {
   constructor(props) {
@@ -90,8 +85,8 @@ class App extends Component {
 
   acClear() {
     this.setState({
-      formula: "",
-      calc_component: "",
+      formula: '',
+      calc_component: '',
       calc_component_array: []
     });
   };
