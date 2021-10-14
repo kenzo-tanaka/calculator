@@ -164,6 +164,10 @@ class App extends Component {
     );
   };
 
+  numberRow = (nums, calcutor) => {
+    return nums.map(num => this.renderNum(num));
+  };
+
   render() {
     return (
       <div className="container text-center custom-middle">
@@ -188,27 +192,19 @@ class App extends Component {
           {this.renderCalc("*")}
         </div>
         <div className="row mt-1">
-          {this.renderNum(7)}
-          {this.renderNum(8)}
-          {this.renderNum(9)}
+          {this.numberRow([7, 8, 9])}
           {this.renderCalc("+")}
         </div>
         <div className="row mt-1">
-          {this.renderNum(4)}
-          {this.renderNum(5)}
-          {this.renderNum(6)}
+          {this.numberRow([4, 5, 6])}
           {this.renderCalc("/")}
         </div>
         <div className="row mt-1">
-          {this.renderNum(1)}
-          {this.renderNum(2)}
-          {this.renderNum(3)}
+          {this.numberRow([1, 2, 3])}
           {this.renderCalc("-")}
         </div>
         <div className="row mt-1">
-          {this.renderNum(0)}
-          {this.renderNum("00")}
-          {this.renderNum(".")}
+          {this.numberRow([0, '00', '.'])}
           {this.renderCalc("=")}
         </div>
         <div className="row mt-1">
