@@ -7,7 +7,10 @@ class NumBtn extends Component {
 
   render() {
     return (
-      <button className="btn btn-light col mr-1">
+      <button
+        className="btn btn-light col mr-1"
+        onClick={() => this.props.onClick()}
+      >
         {this.props.value}
       </button>
     )
@@ -24,8 +27,12 @@ class App extends Component {
     calc_component_array: []
   };
 
+  renderNum = (i) => {
+    return <NumBtn value={i} onClick={() => this.addNum(i)} />;
+  };
+
   // 数値入力
-  adnum = num => {
+  addNum = num => {
     this.setState({
       formula: this.state.formula + num + "",
       calc_component: this.state.calc_component + num + "",
@@ -115,10 +122,6 @@ class App extends Component {
         memory: 0
       });
     }
-  };
-
-  renderNum = (i) => {
-    return <NumBtn value={i} />;
   };
 
   renderCalc(cmd) {
