@@ -52,6 +52,23 @@ class Clear extends Component {
   }
 }
 
+class Memory extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <button
+        className="col mr-1 btn btn-outline-success"
+        onClick={() => this.props.onClick()}
+      >
+        {this.props.cmd}
+      </button>
+    )
+  }
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -75,6 +92,10 @@ class App extends Component {
 
   renderClear(cmd) {
     return <Clear cmd={cmd} onClick={() => this.clear(cmd)} />;
+  };
+
+  renderMemory(cmd) {
+    return <Memory cmd={cmd} onClick={() => this.memory(cmd)} />;
   };
 
   clear = cmd => {
@@ -172,18 +193,6 @@ class App extends Component {
       });
     }
   };
-
-  renderMemory(cmd) {
-    return (
-      <button
-        className="col mr-1 btn btn-outline-success"
-        onClick={e => this.memory(cmd)}
-      >
-        {cmd}
-      </button>
-    );
-  };
-
 
   numberRow = (nums) => {
     return nums.map(num => this.renderNum(num));
