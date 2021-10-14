@@ -163,36 +163,41 @@ class App extends Component {
     }
   };
 
-  // メモリー機能(M+/M-/MC)
   memory = cmd => {
-    if (cmd === "M+") {
-      if (this.state.formula === "" || this.state.calc_component === "") {
-        return;
-      }
-      this.setState({
-        memory: this.state.memory + eval(this.state.formula),
-        formula: "",
-        display_result: eval(this.state.formula),
-        calc_component_array: [],
-        calc_component: ""
-      });
-    } else if (cmd === "M-") {
-      if (this.state.formula === "" || this.state.calc_component === "") {
-        return;
-      }
-      this.setState({
-        memory: this.state.memory - eval(this.state.formula),
-        formula: "",
-        display_result: eval(this.state.formula),
-        calc_component_array: [],
-        calc_component: ""
-      });
-    } else if (cmd === "MC") {
-      this.setState({
-        memory: 0
-      });
-    }
+    if (cmd === "M+") { return this.plusMemory(); }
+    if (cmd === "M-") { return this.minusMemory(); }
+    this.clearMemory();
   };
+
+  plusMemory() {
+    if (this.state.formula === "" || this.state.calc_component === "") { return; }
+
+    this.setState({
+      memory: this.state.memory + eval(this.state.formula),
+      formula: '',
+      display_result: eval(this.state.formula),
+      calc_component_array: [],
+      calc_component: ''
+    });
+  }
+
+  minusMemory() {
+    if (this.state.formula === '' || this.state.calc_component === '') { return; }
+
+    this.setState({
+      memory: this.state.memory - eval(this.state.formula),
+      formula: '',
+      display_result: eval(this.state.formula),
+      calc_component_array: [],
+      calc_component: ''
+    });
+  }
+
+  clearMemory() {
+    this.setState({
+      memory: 0
+    });
+  }
 
   numberRow = (nums) => {
     return nums.map(num => this.renderNum(num));
