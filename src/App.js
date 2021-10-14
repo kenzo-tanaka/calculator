@@ -164,7 +164,7 @@ class App extends Component {
     );
   };
 
-  numberRow = (nums, calcutor) => {
+  numberRow = (nums) => {
     return nums.map(num => this.renderNum(num));
   };
 
