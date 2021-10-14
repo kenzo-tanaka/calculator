@@ -82,6 +82,29 @@ class App extends Component {
     return <Clear cmd={cmd} onClick={() => this.clear(cmd)} />;
   };
 
+  clear = cmd => {
+    if (cmd === 'AC') { return this.acClear(); }
+
+    this.cClear();
+  };
+
+  acClear() {
+    this.setState({
+      formula: "",
+      calc_component: "",
+      calc_component_array: []
+    });
+  };
+
+  cClear() {
+    if (this.state.calc_component === '') { return; }
+
+    this.setState({
+      calc_component: "",
+      formula: this.state.calc_component_array.join("")
+    });
+  }
+
   // 数値入力
   addNum = num => {
     this.setState({
@@ -119,26 +142,6 @@ class App extends Component {
           formula: this.state.formula + cmd + "",
           calc_component: "",
           operator: cmd
-        });
-      }
-    }
-  };
-
-  // クリア機能(C/AC)
-  clear = cmd => {
-    if (cmd === "AC") {
-      this.setState({
-        formula: "",
-        calc_component: "",
-        calc_component_array: []
-      });
-    } else if (cmd === "C") {
-      if (this.state.calc_component === "") {
-        return;
-      } else {
-        this.setState({
-          calc_component: "",
-          formula: this.state.calc_component_array.join("")
         });
       }
     }
