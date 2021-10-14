@@ -103,8 +103,7 @@ class App extends Component {
     }
   };
 
-  // 各種レンダリング
-  renderNum(i) {
+  renderNum = (i) => {
     return (
       <button className="btn btn-light col mr-1" onClick={e => this.adnum(i)}>
         {i}
