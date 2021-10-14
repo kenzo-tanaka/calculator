@@ -16,6 +16,29 @@ class NumBtn extends Component {
   }
 }
 
+class Executor extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  translateToExecutor(cmd) {
+    if (cmd === '/') { return '÷' }
+    if (cmd === '*') { return 'x' }
+
+    return cmd;
+  }
+
+  render() {
+    return (
+      <button
+        className="col mr-1 btn btn-success"
+      >
+        {this.translateToExecutor(this.props.cmd)}
+      </button>
+    )
+  }
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +54,10 @@ class App extends Component {
 
   renderNum = (i) => {
     return <NumBtn value={i} onClick={() => this.addNum(i)} />;
+  };
+
+  renderCalc(cmd) {
+    return <Executor cmd={cmd} />;
   };
 
   // 数値入力
@@ -126,37 +153,6 @@ class App extends Component {
     }
   };
 
-  renderCalc(cmd) {
-    if (cmd === "/") {
-      return (
-        <button
-          className="col mr-1 btn btn-success"
-          onClick={e => this.calc(cmd)}
-        >
-          ÷
-        </button>
-      );
-    } else if (cmd === "*") {
-      return (
-        <button
-          className="col mr-1 btn btn-success"
-          onClick={e => this.calc(cmd)}
-        >
-          ×
-        </button>
-      );
-    }
-
-    return (
-      <button
-        className="col mr-1 btn btn-success"
-        onClick={e => this.calc(cmd)}
-      >
-        {cmd}
-      </button>
-    );
-  };
-
   renderMemory(cmd) {
     return (
       <button
@@ -204,23 +200,23 @@ class App extends Component {
           {this.renderMemory("MC")}
           {this.renderMemory("M-")}
           {this.renderMemory("M+")}
-          {this.renderCalc("*")}
+          {this.renderCalc('*')}
         </div>
         <div className="row mt-1">
           {this.numberRow([7, 8, 9])}
-          {this.renderCalc("+")}
+          {this.renderCalc('+')}
         </div>
         <div className="row mt-1">
           {this.numberRow([4, 5, 6])}
-          {this.renderCalc("/")}
+          {this.renderCalc('/')}
         </div>
         <div className="row mt-1">
           {this.numberRow([1, 2, 3])}
-          {this.renderCalc("-")}
+          {this.renderCalc('-')}
         </div>
         <div className="row mt-1">
           {this.numberRow([0, '00', '.'])}
-          {this.renderCalc("=")}
+          {this.renderCalc('=')}
         </div>
         <div className="row mt-1">
           {this.renderClear("C")}
