@@ -109,7 +109,7 @@ class App extends Component {
         {i}
       </button>
     );
-  }
+  };
 
   renderCalc(cmd) {
     if (cmd === "/") {
@@ -140,7 +140,7 @@ class App extends Component {
         {cmd}
       </button>
     );
-  }
+  };
 
   renderMemory(cmd) {
     return (
@@ -151,7 +151,7 @@ class App extends Component {
         {cmd}
       </button>
     );
-  }
+  };
 
   renderClear(cmd) {
     return (
@@ -162,7 +162,7 @@ class App extends Component {
         {cmd}
       </button>
     );
-  }
+  };
 
   render() {
     return (
