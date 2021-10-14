@@ -40,6 +40,23 @@ class Executor extends Component {
   }
 }
 
+class Clear extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <button
+        className="col mr-1 btn btn-success"
+        onClick={() => this.props.onClick()}
+      >
+        {this.props.cmd}
+      </button>
+    )
+  }
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -61,11 +78,15 @@ class App extends Component {
     return <Executor cmd={cmd} onClick={() => this.calc(cmd)} />;
   };
 
+  renderClear(cmd) {
+    return <Clear cmd={cmd} onClick={() => this.clear(cmd)} />;
+  };
+
   // 数値入力
   addNum = num => {
     this.setState({
-      formula: this.state.formula + num + "",
-      calc_component: this.state.calc_component + num + "",
+      formula: this.state.formula + num,
+      calc_component: this.state.calc_component + num,
       operator: ""
     });
   };
@@ -165,16 +186,6 @@ class App extends Component {
     );
   };
 
-  renderClear(cmd) {
-    return (
-      <button
-        className="col mr-1 btn btn-success"
-        onClick={e => this.clear(cmd)}
-      >
-        {cmd}
-      </button>
-    );
-  };
 
   numberRow = (nums) => {
     return nums.map(num => this.renderNum(num));
