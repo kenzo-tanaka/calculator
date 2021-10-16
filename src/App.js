@@ -34,6 +34,8 @@ class App extends Component {
   };
 
   addNum = num => {
+    if (this.state.operator !== '') { this.setState({ all_inputs: this.state.all_inputs.concat(this.state.operator) }) };
+
     this.setState({
       operator: '',
       current_input: this.state.current_input + String(num),
