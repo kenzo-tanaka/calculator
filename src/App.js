@@ -85,24 +85,20 @@ class App extends Component {
   };
 
   plusMemory() {
-    if (this.state.formula === '' || this.state.calc_component === '') { return; }
+    if (this.state.formula === '') { return; }
 
     this.setState({
       memory: this.state.memory + eval(this.state.formula),
       formula: '',
-      calc_component_array: [],
-      calc_component: ''
     });
   }
 
   minusMemory() {
-    if (this.state.formula === '' || this.state.calc_component === '') { return; }
+    if (this.state.formula === '') { return; }
 
     this.setState({
       memory: this.state.memory - eval(this.state.formula),
       formula: '',
-      calc_component_array: [],
-      calc_component: ''
     });
   }
 
