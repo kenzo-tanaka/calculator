@@ -42,8 +42,6 @@ class App extends Component {
   acClear() {
     this.setState({
       formula: '',
-      calc_component: '',
-      calc_component_array: []
     });
   };
 
@@ -56,7 +54,6 @@ class App extends Component {
     });
   }
 
-  // TODO: 後で上部に移動
   addNum = num => {
     this.setState({
       formula: this.state.formula + num,
