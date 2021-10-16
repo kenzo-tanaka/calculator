@@ -56,46 +56,26 @@ class App extends Component {
     });
   }
 
-  // 数値入力
+  // TODO: 後で上部に移動
   addNum = num => {
     this.setState({
       formula: this.state.formula + num,
-      // calc_component: this.state.calc_component + num,
-      // operator: ''
     });
   };
 
-  // 四則演算(×/+/÷/-/=)
   calc = cmd => {
-    if (cmd === "=") {
-      if (this.state.calc_component === '') {
-        return;
-      }
+    if (cmd === '=' && this.formula === '') { return; }
+    if (cmd === '=') {
       this.setState({
-        formula: eval(this.state.formula),
-        calc_component: '',
-        display_result: eval(this.state.formula)
-      });
-    } else {
-      if (this.state.operator !== '') {
-        this.state.calc_component_array.pop();
-        this.setState({
-          operator: cmd,
-          formula: this.state.formula.slice(0, -1) + cmd,
-          calc_component_array: this.state.calc_component_array.concat(cmd)
-        });
-      } else {
-        const cmd_and_num = [this.state.calc_component, cmd];
-        this.setState({
-          calc_component_array: this.state.calc_component_array.concat(
-            cmd_and_num
-          ),
-          formula: this.state.formula + cmd + '',
-          calc_component: '',
-          operator: cmd
-        });
-      }
+        display_result: eval(this.state.formula),
+        formula: ''
+      })
+      return;
     }
+
+    this.setState({
+      formula: this.state.formula + cmd,
+    })
   };
 
   memory = cmd => {
