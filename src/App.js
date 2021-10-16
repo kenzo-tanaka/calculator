@@ -64,12 +64,12 @@ class App extends Component {
   };
 
   clear = cmd => {
-    if (cmd === 'AC') { return this.acClear(); }
+    if (cmd === 'AC') { return this.allClear(); }
 
     this.cClear();
   };
 
-  acClear() {
+  allClear() {
     this.setState({
       formula: '',
     });
