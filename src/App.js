@@ -54,6 +54,7 @@ class App extends Component {
     this.setState({
       all_inputs: this.state.all_inputs.concat(this.state.current_input),
       operator: cmd,
+      current_input: '',
       formula: this.state.formula + cmd,
     })
   };
