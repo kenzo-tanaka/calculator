@@ -11,6 +11,7 @@ class App extends Component {
       formula: '',
       display_result: 0,
       memory: 0,
+      operator: '',
       current_input: '',
       all_inputs: [],
     }
