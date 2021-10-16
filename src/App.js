@@ -12,7 +12,7 @@ class App extends Component {
       display_result: 0,
       memory: 0,
       current_input: '',
-      all_inputs: '',
+      all_inputs: [],
     }
   }
 
@@ -39,6 +39,23 @@ class App extends Component {
     });
   };
 
+  calc = cmd => {
+    if (cmd === '=' && this.formula === '') { return; }
+    if (cmd === '=') {
+      this.setState({
+        display_result: eval(this.state.formula),
+        formula: ''
+      })
+      return;
+    }
+
+    this.setState({
+      all_inputs: this.state.all_inputs.concat(this.state.current_input),
+      current_input: cmd,
+      formula: this.state.formula + cmd,
+    })
+  };
+
   clear = cmd => {
     if (cmd === 'AC') { return this.acClear(); }
 
@@ -57,21 +74,6 @@ class App extends Component {
     this.setState({
       current_input: '',
     });
-  }
-
-  calc = cmd => {
-    if (cmd === '=' && this.formula === '') { return; }
-    if (cmd === '=') {
-      this.setState({
-        display_result: eval(this.state.formula),
-        formula: ''
-      })
-      return;
-    }
-
-    this.setState({
-      formula: this.state.formula + cmd,
-    })
   };
 
   memory = cmd => {
