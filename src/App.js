@@ -35,6 +35,7 @@ class App extends Component {
 
   addNum = num => {
     this.setState({
+      operator: '',
       current_input: this.state.current_input + String(num),
       formula: this.state.formula + String(num),
     });
@@ -52,7 +53,7 @@ class App extends Component {
 
     this.setState({
       all_inputs: this.state.all_inputs.concat(this.state.current_input),
-      current_input: cmd,
+      operator: cmd,
       formula: this.state.formula + cmd,
     })
   };
