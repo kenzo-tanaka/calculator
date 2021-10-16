@@ -11,8 +11,7 @@ class App extends Component {
       formula: '',
       display_result: 0,
       memory: 0,
-      calc_component: '', //入力中の数値を一時的に保管
-      calc_component_array: []
+      current_input: '',
     }
   }
 
@@ -45,11 +44,10 @@ class App extends Component {
   };
 
   cClear() {
-    if (this.state.calc_component === '') { return; }
+    if (this.state.current_input === '') { return; }
 
     this.setState({
-      calc_component: '',
-      formula: this.state.calc_component_array.join('')
+      current_input: '',
     });
   }
 
