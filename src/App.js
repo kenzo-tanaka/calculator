@@ -60,8 +60,8 @@ class App extends Component {
   addNum = num => {
     this.setState({
       formula: this.state.formula + num,
-      calc_component: this.state.calc_component + num,
-      operator: ''
+      // calc_component: this.state.calc_component + num,
+      // operator: ''
     });
   };
 
