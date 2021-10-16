@@ -72,6 +72,9 @@ class App extends Component {
   allClear() {
     this.setState({
       formula: '',
+      current_input: '',
+      operator: '',
+      all_inputs: []
     });
   };
 
