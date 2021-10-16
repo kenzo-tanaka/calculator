@@ -2,23 +2,7 @@ import React, { Component } from "react";
 import NumBtn from "./components/NumBtn";
 import ExecutorBtn from "./components/ExecutorBtn";
 import ClearBtn from "./components/ClearBtn";
-
-class MemoryBtn extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <button
-        className="col mr-1 btn btn-outline-success"
-        onClick={() => this.props.onClick()}
-      >
-        {this.props.cmd}
-      </button>
-    )
-  }
-}
+import MemoryBtn from "./components/MemoryBtn";
 
 class App extends Component {
   constructor(props) {
