@@ -1,30 +1,6 @@
 import React, { Component } from "react";
 import NumBtn from "./components/NumBtn";
-
-
-class ExecutorBtn extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  translateToExecutor(cmd) {
-    if (cmd === '/') { return '÷' }
-    if (cmd === '*') { return 'x' }
-
-    return cmd;
-  }
-
-  render() {
-    return (
-      <button
-        className="col mr-1 btn btn-success"
-        onClick={() => this.props.onClick()}
-      >
-        {this.translateToExecutor(this.props.cmd)}
-      </button>
-    )
-  }
-}
+import ExecutorBtn from "./components/ExecutorBtn";
 
 class ClearBtn extends Component {
   constructor(props) {
