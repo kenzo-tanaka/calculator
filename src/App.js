@@ -110,7 +110,6 @@ class App extends Component {
     this.setState({
       memory: this.state.memory + eval(this.state.formula),
       formula: '',
-      display_result: eval(this.state.formula),
       calc_component_array: [],
       calc_component: ''
     });
@@ -122,7 +121,6 @@ class App extends Component {
     this.setState({
       memory: this.state.memory - eval(this.state.formula),
       formula: '',
-      display_result: eval(this.state.formula),
       calc_component_array: [],
       calc_component: ''
     });
