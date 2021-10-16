@@ -48,7 +48,9 @@ class App extends Component {
     if (cmd === '=') {
       this.setState({
         display_result: eval(this.state.formula),
-        formula: ''
+        current_input: '',
+        formula: '',
+        all_inputs: []
       })
       return;
     }
