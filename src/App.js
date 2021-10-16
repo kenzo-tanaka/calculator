@@ -8,11 +8,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formula: "",
+      formula: '',
       display_result: 0,
       memory: 0,
-      calc_component: "", //入力中の数値を一時的に保管
-      operator: "", //入力中の演算子を一時的に保管
+      calc_component: '', //入力中の数値を一時的に保管
+      operator: '', //入力中の演算子を一時的に保管
       calc_component_array: []
     }
   }
@@ -51,8 +51,8 @@ class App extends Component {
     if (this.state.calc_component === '') { return; }
 
     this.setState({
-      calc_component: "",
-      formula: this.state.calc_component_array.join("")
+      calc_component: '',
+      formula: this.state.calc_component_array.join('')
     });
   }
 
@@ -61,23 +61,23 @@ class App extends Component {
     this.setState({
       formula: this.state.formula + num,
       calc_component: this.state.calc_component + num,
-      operator: ""
+      operator: ''
     });
   };
 
   // 四則演算(×/+/÷/-/=)
   calc = cmd => {
     if (cmd === "=") {
-      if (this.state.calc_component === "") {
+      if (this.state.calc_component === '') {
         return;
       }
       this.setState({
         formula: eval(this.state.formula),
-        calc_component: "",
+        calc_component: '',
         display_result: eval(this.state.formula)
       });
     } else {
-      if (this.state.operator !== "") {
+      if (this.state.operator !== '') {
         this.state.calc_component_array.pop();
         this.setState({
           operator: cmd,
@@ -90,8 +90,8 @@ class App extends Component {
           calc_component_array: this.state.calc_component_array.concat(
             cmd_and_num
           ),
-          formula: this.state.formula + cmd + "",
-          calc_component: "",
+          formula: this.state.formula + cmd + '',
+          calc_component: '',
           operator: cmd
         });
       }
@@ -99,13 +99,13 @@ class App extends Component {
   };
 
   memory = cmd => {
-    if (cmd === "M+") { return this.plusMemory(); }
-    if (cmd === "M-") { return this.minusMemory(); }
+    if (cmd === 'M+') { return this.plusMemory(); }
+    if (cmd === 'M-') { return this.minusMemory(); }
     this.clearMemory();
   };
 
   plusMemory() {
-    if (this.state.formula === "" || this.state.calc_component === "") { return; }
+    if (this.state.formula === '' || this.state.calc_component === '') { return; }
 
     this.setState({
       memory: this.state.memory + eval(this.state.formula),
