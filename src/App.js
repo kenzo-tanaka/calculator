@@ -12,6 +12,7 @@ class App extends Component {
       display_result: 0,
       memory: 0,
       current_input: '',
+      all_inputs: '',
     }
   }
 
@@ -29,6 +30,13 @@ class App extends Component {
 
   renderMemory(cmd) {
     return <MemoryBtn cmd={cmd} onClick={() => this.memory(cmd)} />;
+  };
+
+  addNum = num => {
+    this.setState({
+      current_input: this.state.current_input + String(num),
+      formula: this.state.formula + String(num),
+    });
   };
 
   clear = cmd => {
@@ -50,12 +58,6 @@ class App extends Component {
       current_input: '',
     });
   }
-
-  addNum = num => {
-    this.setState({
-      formula: this.state.formula + num,
-    });
-  };
 
   calc = cmd => {
     if (cmd === '=' && this.formula === '') { return; }
