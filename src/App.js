@@ -1,20 +1,66 @@
 import React, { Component } from "react";
+import NumBtn from "./components/NumBtn";
+import ExecutorBtn from "./components/ExecutorBtn";
+import ClearBtn from "./components/ClearBtn";
+import MemoryBtn from "./components/MemoryBtn";
 
 class App extends Component {
-  state = {
-    formula: "",
-    display_result: 0,
-    memory: 0,
-    calc_component: "", //入力中の数値を一時的に保管
-    operator: "", //入力中の演算子を一時的に保管
-    calc_component_array: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      formula: "",
+      display_result: 0,
+      memory: 0,
+      calc_component: "", //入力中の数値を一時的に保管
+      operator: "", //入力中の演算子を一時的に保管
+      calc_component_array: []
+    }
+  }
+
+  renderNum = (i) => {
+    return <NumBtn value={i} onClick={() => this.addNum(i)} />;
   };
 
-  // 数値入力
-  adnum = num => {
+  renderCalc(cmd) {
+    return <ExecutorBtn cmd={cmd} onClick={() => this.calc(cmd)} />;
+  };
+
+  renderClear(cmd) {
+    return <ClearBtn cmd={cmd} onClick={() => this.clear(cmd)} />;
+  };
+
+  renderMemory(cmd) {
+    return <MemoryBtn cmd={cmd} onClick={() => this.memory(cmd)} />;
+  };
+
+  clear = cmd => {
+    if (cmd === 'AC') { return this.acClear(); }
+
+    this.cClear();
+  };
+
+  acClear() {
     this.setState({
-      formula: this.state.formula + num + "",
-      calc_component: this.state.calc_component + num + "",
+      formula: '',
+      calc_component: '',
+      calc_component_array: []
+    });
+  };
+
+  cClear() {
+    if (this.state.calc_component === '') { return; }
+
+    this.setState({
+      calc_component: "",
+      formula: this.state.calc_component_array.join("")
+    });
+  }
+
+  // 数値入力
+  addNum = num => {
+    this.setState({
+      formula: this.state.formula + num,
+      calc_component: this.state.calc_component + num,
       operator: ""
     });
   };
@@ -52,117 +98,41 @@ class App extends Component {
     }
   };
 
-  // クリア機能(C/AC)
-  clear = cmd => {
-    if (cmd === "AC") {
-      this.setState({
-        formula: "",
-        calc_component: "",
-        calc_component_array: []
-      });
-    } else if (cmd === "C") {
-      if (this.state.calc_component === "") {
-        return;
-      } else {
-        this.setState({
-          calc_component: "",
-          formula: this.state.calc_component_array.join("")
-        });
-      }
-    }
-  };
-
-  // メモリー機能(M+/M-/MC)
   memory = cmd => {
-    if (cmd === "M+") {
-      if (this.state.formula === "" || this.state.calc_component === "") {
-        return;
-      }
-      this.setState({
-        memory: this.state.memory + eval(this.state.formula),
-        formula: "",
-        display_result: eval(this.state.formula),
-        calc_component_array: [],
-        calc_component: ""
-      });
-    } else if (cmd === "M-") {
-      if (this.state.formula === "" || this.state.calc_component === "") {
-        return;
-      }
-      this.setState({
-        memory: this.state.memory - eval(this.state.formula),
-        formula: "",
-        display_result: eval(this.state.formula),
-        calc_component_array: [],
-        calc_component: ""
-      });
-    } else if (cmd === "MC") {
-      this.setState({
-        memory: 0
-      });
-    }
+    if (cmd === "M+") { return this.plusMemory(); }
+    if (cmd === "M-") { return this.minusMemory(); }
+    this.clearMemory();
   };
 
-  renderNum = (i) => {
-    return (
-      <button className="btn btn-light col mr-1" onClick={e => this.adnum(i)}>
-        {i}
-      </button>
-    );
-  };
+  plusMemory() {
+    if (this.state.formula === "" || this.state.calc_component === "") { return; }
 
-  renderCalc(cmd) {
-    if (cmd === "/") {
-      return (
-        <button
-          className="col mr-1 btn btn-success"
-          onClick={e => this.calc(cmd)}
-        >
-          ÷
-        </button>
-      );
-    } else if (cmd === "*") {
-      return (
-        <button
-          className="col mr-1 btn btn-success"
-          onClick={e => this.calc(cmd)}
-        >
-          ×
-        </button>
-      );
-    }
+    this.setState({
+      memory: this.state.memory + eval(this.state.formula),
+      formula: '',
+      display_result: eval(this.state.formula),
+      calc_component_array: [],
+      calc_component: ''
+    });
+  }
 
-    return (
-      <button
-        className="col mr-1 btn btn-success"
-        onClick={e => this.calc(cmd)}
-      >
-        {cmd}
-      </button>
-    );
-  };
+  minusMemory() {
+    if (this.state.formula === '' || this.state.calc_component === '') { return; }
 
-  renderMemory(cmd) {
-    return (
-      <button
-        className="col mr-1 btn btn-outline-success"
-        onClick={e => this.memory(cmd)}
-      >
-        {cmd}
-      </button>
-    );
-  };
+    this.setState({
+      memory: this.state.memory - eval(this.state.formula),
+      formula: '',
+      display_result: eval(this.state.formula),
+      calc_component_array: [],
+      calc_component: ''
+    });
+  }
 
-  renderClear(cmd) {
-    return (
-      <button
-        className="col mr-1 btn btn-success"
-        onClick={e => this.clear(cmd)}
-      >
-        {cmd}
-      </button>
-    );
-  };
+  clearMemory() {
+    this.setState({
+      memory: 0
+    });
+  }
 
   numberRow = (nums) => {
     return nums.map(num => this.renderNum(num));
@@ -186,30 +156,30 @@ class App extends Component {
           value={this.state.formula}
         />
         <div className="row">
-          {this.renderMemory("MC")}
-          {this.renderMemory("M-")}
-          {this.renderMemory("M+")}
-          {this.renderCalc("*")}
+          {this.renderMemory('MC')}
+          {this.renderMemory('M-')}
+          {this.renderMemory('M+')}
+          {this.renderCalc('*')}
         </div>
         <div className="row mt-1">
           {this.numberRow([7, 8, 9])}
-          {this.renderCalc("+")}
+          {this.renderCalc('+')}
         </div>
         <div className="row mt-1">
           {this.numberRow([4, 5, 6])}
-          {this.renderCalc("/")}
+          {this.renderCalc('/')}
         </div>
         <div className="row mt-1">
           {this.numberRow([1, 2, 3])}
-          {this.renderCalc("-")}
+          {this.renderCalc('-')}
         </div>
         <div className="row mt-1">
           {this.numberRow([0, '00', '.'])}
-          {this.renderCalc("=")}
+          {this.renderCalc('=')}
         </div>
         <div className="row mt-1">
-          {this.renderClear("C")}
-          {this.renderClear("AC")}
+          {this.renderClear('C')}
+          {this.renderClear('AC')}
         </div>
       </div>
     );
